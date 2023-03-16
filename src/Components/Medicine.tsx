@@ -1,5 +1,6 @@
 import React from "react";
 import Dropdown from "./custom-component/Dropdown";
+import "./Medicine.css";
 
 export default function Medicine() {
   return (

@@ -1,12 +1,15 @@
 import React from "react";
+type AddmedicineType = {
+  onClick: () => void;
+};
 
-export default function AddMedicineField() {
+export default function AddMedicineField(props: AddmedicineType) {
   const addMedicineHandler = () => {
     console.log("Clicked");
   };
 
   return (
-    <div className="add" onClick={addMedicineHandler}>
+    <div className="add" onClick={props.onClick}>
       <span className="add-label">Add</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
