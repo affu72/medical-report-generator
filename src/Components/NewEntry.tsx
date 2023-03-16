@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import "./assets/NewEntry.css";
+import "../assets/NewEntry.css";
 import Dropdown from "./custom-component/Dropdown";
 import CustomFiled from "./CustomFields";
 import MedicineList from "./MedicineList";

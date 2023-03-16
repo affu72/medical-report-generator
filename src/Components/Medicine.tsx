@@ -1,19 +1,20 @@
 import React from "react";
 import Dropdown from "./custom-component/Dropdown";
-import "./assets/Medicine.css";
+import "../assets/Medicine.css";
 
 type MedicineType = {
-  deleteHandler: () => void;
+  deleteHandler: (id: string) => void;
+  id: string;
 };
 
 export default function Medicine(props: MedicineType) {
   const deleteClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event?.preventDefault();
-    props.deleteHandler();
+    props.deleteHandler(props.id);
   };
 
   return (
-    <div className="medicine">
+    <div className="medicine" id={props.id + ""}>
       <Dropdown values={["Tablet", "Syrup", "Injec."]}></Dropdown>
       <input placeholder="Medicine name" type="text" />
       <input placeholder="Dose" type="text" />

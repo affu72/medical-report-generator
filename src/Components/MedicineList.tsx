@@ -3,22 +3,34 @@ import AddMedicineField from "./AddMedicineField";
 import Medicine from "./Medicine";
 
 export default function MedicineList() {
-  const fieldList: any[] = [];
+  const fieldList: { id: string; ele: React.ReactNode }[] = [];
 
   const [medicines, setMedicines] = useState(fieldList);
 
-  const deletedMedicineHandler = () => {
+  const deletedMedicineHandler = (id: string) => {
     setMedicines((prev) => {
-      prev.pop();
-      return prev;
+      return prev.filter((ele) => ele.id !== id);
     });
   };
 
   const addMedicineHandler = () => {
-    setMedicines((prev) => [
-      ...prev,
-      <Medicine key={Date.now()} deleteHandler={deletedMedicineHandler} />,
-    ]);
+    setMedicines((prev) => {
+      const idOfElement = Date.now().toString();
+
+      return [
+        ...prev,
+        {
+          id: idOfElement,
+          ele: (
+            <Medicine
+              deleteHandler={deletedMedicineHandler}
+              key={idOfElement}
+              id={idOfElement}
+            ></Medicine>
+          ),
+        },
+      ];
+    });
   };
 
   return (
@@ -26,7 +38,7 @@ export default function MedicineList() {
       className="medicine-container"
       style={{ display: "flex", flexDirection: "column", gap: "20px" }}
     >
-      {medicines}
+      {medicines.length === 0 || medicines.map((med) => med.ele)}
       <AddMedicineField onClick={addMedicineHandler} />
     </div>
   );
