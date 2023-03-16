@@ -19,11 +19,13 @@ export default function Dropdown({
       defaultValue={values[0]}
       onChange={onChangeHandler}
     >
-      {values.map((value, i) => (
-        <option key={i} value={value} disabled={i === 0}>
-          {value}
-        </option>
-      ))}
+      {values.map((val, i) => {
+        return (
+          <option key={i + "" + val} value={val}>
+            {val}
+          </option>
+        );
+      })}
     </select>
   );
 }

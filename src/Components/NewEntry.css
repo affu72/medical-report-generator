@@ -1,0 +1,86 @@
+/* form {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+
+form {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px 45px;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.patient-details input,
+.reading-container input,
+.dropdown {
+  padding: 7px 14px;
+  font-size: 16px;
+  outline-color: rgb(11, 184, 16);
+}
+
+.dropdown {
+  box-sizing: content-box;
+}
+
+textarea {
+  width: 100%;
+  height: 93%;
+  resize: none;
+  padding: 10px 0 0 10px;
+  font-size: 16px;
+
+  outline-color: rgb(11, 184, 16);
+}
+.medical-history {
+}
+
+.reading-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: 0.2s all;
+}
+
+.add {
+  font-size: 18px;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative;
+  z-index: 100;
+  transition: 0.2s all;
+}
+
+.add:active {
+  transform: scale(0.9);
+}
+
+.add-label {
+  text-transform: capitalize;
+  padding: 8px 15px 12px 8px;
+  user-select: none;
+  position: absolute;
+  right: 0;
+}
+
+.plus {
+  width: 36px;
+  fill: rgb(11, 184, 16);
+}
+
+.medicine {
+  display: flex;
+  gap: 30px;
+}
