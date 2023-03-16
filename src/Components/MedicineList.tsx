@@ -7,8 +7,18 @@ export default function MedicineList() {
 
   const [medicines, setMedicines] = useState(fieldList);
 
+  const deletedMedicineHandler = () => {
+    setMedicines((prev) => {
+      prev.pop();
+      return prev;
+    });
+  };
+
   const addMedicineHandler = () => {
-    setMedicines((prev) => [...prev, <Medicine />]);
+    setMedicines((prev) => [
+      ...prev,
+      <Medicine key={Date.now()} deleteHandler={deletedMedicineHandler} />,
+    ]);
   };
 
   return (

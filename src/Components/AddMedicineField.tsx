@@ -1,13 +1,10 @@
 import React from "react";
+
 type AddmedicineType = {
   onClick: () => void;
 };
 
 export default function AddMedicineField(props: AddmedicineType) {
-  const addMedicineHandler = () => {
-    console.log("Clicked");
-  };
-
   return (
     <div className="add" onClick={props.onClick}>
       <span className="add-label">Add</span>
@@ -16,7 +13,7 @@ export default function AddMedicineField(props: AddmedicineType) {
         className="plus"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth="1"
+        strokeWidth="1.3"
         stroke="currentColor"
       >
         <path
