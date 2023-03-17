@@ -1,7 +1,7 @@
-const path = require("path");
+import path from "path";
 
-const { app, BrowserWindow } = require("electron");
-const isDev = require("electron-is-dev");
+import { app, BrowserWindow } from "electron";
+import isDev from "electron-is-dev";
 
 function createWindow() {
   // Create the browser window.

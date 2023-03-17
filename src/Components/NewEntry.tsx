@@ -3,14 +3,19 @@ import "../assets/NewEntry.css";
 import Dropdown from "./custom-component/Dropdown";
 import CustomFiled from "./CustomFields";
 import MedicineList from "./MedicineList";
+
 export default function NewEntry() {
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [age, setAge] = useState("");
+  const [history, setHistory] = useState("");
+
   const optionList: string[] = [
     "Choose Reading Type",
     "Weight",
     "Pulse",
     "Spo2",
     "B.P",
-    // "Add custom field",
   ];
 
   const initialList: string[] = [];
@@ -35,32 +40,68 @@ export default function NewEntry() {
     setCustomInputs((prev) => [...prev, selectedOption]);
   };
 
+  const submitFormHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(title, name, age, history);
+  };
+
+  const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
+    setName(event.target.value);
+
+  const ageChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
+    setAge(event.target.value);
+
+  const titleHandler = (event: ChangeEvent<HTMLSelectElement>) =>
+    setTitle(event.target.value);
+
+  const historyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) =>
+    setHistory(event.target.value);
+
   return (
-    <form>
-      <div className="patient-details">
-        <Dropdown values={["Choose title", "Miss", "Mr.", "Mrs."]} />
-        <input placeholder="Patient name..." type="text" />
-        <input placeholder="Patient age" type="number" />
-        <Dropdown values={["Choose Gender", "Male", "Female"]}></Dropdown>
-      </div>
-      <div className="medical-history">
-        <textarea placeholder="Medical history" name="" id="" />
-      </div>
-
-      <div className="reading-container">
-        {customInputs.map((input) => (
-          <CustomFiled label={input}></CustomFiled>
-        ))}
-
-        {newOptionList.length === 1 ? null : (
+    <form onSubmit={submitFormHandler}>
+      <div className="form-Handler">
+        <div className="patient-details">
           <Dropdown
-            onChangeHandler={optionHandler}
-            values={newOptionList}
-          ></Dropdown>
-        )}
-      </div>
+            values={["Choose title", "Miss", "Mr.", "Mrs."]}
+            onChangeHandler={titleHandler}
+          />
+          <input
+            placeholder="Patient name..."
+            type="text"
+            onChange={nameChangeHandler}
+          />
+          <input
+            placeholder="Patient age"
+            type="number"
+            onChange={ageChangeHandler}
+          />
+          <Dropdown values={["Choose Gender", "Male", "Female"]}></Dropdown>
+        </div>
+        <div className="medical-history">
+          <textarea
+            placeholder="Medical history"
+            name=""
+            id=""
+            onChange={historyChangeHandler}
+          />
+        </div>
 
-      <MedicineList />
+        <div className="reading-container">
+          {customInputs.map((input, i) => (
+            <CustomFiled label={input} key={i + input}></CustomFiled>
+          ))}
+
+          {newOptionList.length === 1 ? null : (
+            <Dropdown
+              onChangeHandler={optionHandler}
+              values={newOptionList}
+            ></Dropdown>
+          )}
+        </div>
+
+        <MedicineList />
+      </div>
+      <button type="submit">Generate PDF</button>
     </form>
   );
 }
