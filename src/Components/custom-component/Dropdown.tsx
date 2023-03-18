@@ -1,7 +1,10 @@
 import React, { ChangeEvent } from "react";
 
 type OptionList = {
-  onChangeHandler?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onChangeHandler?: (
+    event: ChangeEvent<HTMLSelectElement>,
+    index?: number
+  ) => void;
   className?: string;
   values: string[];
 };
@@ -21,7 +24,7 @@ export default function Dropdown({
     >
       {values.map((val, i) => {
         return (
-          <option key={i + "" + val} value={val}>
+          <option key={i + "" + val} value={i === 0 ? "" : val}>
             {val}
           </option>
         );

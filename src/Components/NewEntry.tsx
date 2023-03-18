@@ -2,7 +2,8 @@ import React, { ChangeEvent, useState } from "react";
 import "../assets/NewEntry.css";
 import Dropdown from "./custom-component/Dropdown";
 import CustomFiled from "./CustomFields";
-import MedicineList from "./MedicineList";
+import NewMedicineList from "./NewMedicinList";
+import { IMedicine } from "./NewMedicinList";
 
 export default function NewEntry() {
   const [name, setName] = useState("");
@@ -45,8 +46,9 @@ export default function NewEntry() {
     console.log(title, name, age, history);
   };
 
-  const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
+  const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+  };
 
   const ageChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
     setAge(event.target.value);
@@ -54,8 +56,14 @@ export default function NewEntry() {
   const titleHandler = (event: ChangeEvent<HTMLSelectElement>) =>
     setTitle(event.target.value);
 
-  const historyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) =>
+  const historyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(event.target.name);
     setHistory(event.target.value);
+  };
+
+  const getDataHandler = (medicines: IMedicine[]) => {
+    console.log(medicines);
+  };
 
   return (
     <form onSubmit={submitFormHandler}>
@@ -80,7 +88,7 @@ export default function NewEntry() {
         <div className="medical-history">
           <textarea
             placeholder="Medical history"
-            name=""
+            name="textarea"
             id=""
             onChange={historyChangeHandler}
           />
@@ -99,9 +107,11 @@ export default function NewEntry() {
           )}
         </div>
 
-        <MedicineList />
+        <NewMedicineList getData={getDataHandler} />
       </div>
-      <button type="submit">Generate PDF</button>
+      <button className="pdf-button" type="submit">
+        Generate PDF
+      </button>
     </form>
   );
 }
